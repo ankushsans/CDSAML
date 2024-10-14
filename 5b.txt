@@ -1,0 +1,52 @@
+ CREATE TABLE `stcou` (
+  `name` varchar(20) NOT NULL,
+  `course` varchar(20) NOT NULL,
+  `grade` char(1) DEFAULT NULL,
+  PRIMARY KEY (`name`,`course`)
+);
+insert into stcou values('Alex','Maths','S');
+insert into stcou values('Alex','Physics','S');
+insert into stcou values('Bert','Maths','S');
+insert into stcou values('Bert','Physics','S');
+insert into stcou values('Charles','Maths','A');
+insert into stcou values('Charles','Physics','A');
+insert into stcou values('Dennis','Maths','A');
+insert into stcou values('Dennis','Physics','A');
+insert into stcou values('Evans','Maths','A');
+insert into stcou values('Evans','Physics','A');
+
+SELECT grade FROM stcou WHERE course = 'Physics'
+UNION
+SELECT grade FROM stcou WHERE course = 'Maths';
+
+SELECT grade FROM stcou WHERE course = 'Physics'
+UNION ALL
+SELECT grade FROM stcou WHERE course = 'Maths';
+
+SELECT distinct grade FROM stcou WHERE course = 'Physics'
+UNION ALL
+SELECT distinct grade FROM stcou WHERE course = 'Maths';
+
+SELECT grade FROM stcou WHERE course = 'Physics'
+Intersect
+SELECT grade FROM stcou WHERE course = 'Maths';
+
+SELECT grade FROM stcou WHERE course = 'Physics'
+Intersect all
+SELECT grade FROM stcou WHERE course = 'Maths';
+
+SELECT grade FROM stcou WHERE course = 'Physics'
+Except
+SELECT grade FROM stcou WHERE course = 'Maths';
+
+SELECT grade FROM stcou WHERE course = 'Maths'
+Except
+SELECT grade FROM stcou WHERE course = 'Physics';
+
+SELECT grade FROM stcou WHERE course = 'Physics'
+Except all
+SELECT grade FROM stcou WHERE course = 'Maths';
+
+SELECT grade FROM stcou WHERE course = 'Maths'
+Except all
+SELECT grade FROM stcou WHERE course = 'Physics';

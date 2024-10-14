@@ -1,0 +1,30 @@
+create databse company;
+use company;
+create table emp(ssn int primary key, ename varchar(20) not null, dob DATE, sal float(10,2) check(sal>0), Gender enum('M','F'), dno int, constraint dnofk foreign key(dno) references dept(dno) on delete cascade);
+create table dept(dno int primary key, dname varchar(20) unique);
+alter table emp drop constraint dnofk;
+alter table emp drop primary key;
+alter table dept add column mgrssn int first;
+alter table dept add column loc varchar(20) after dno;
+drop table if exists table1;
+truncate table table_name;
+insert into dept values(1,100,'RR','Acc');
+select * from dept;
+//when primary key tried to duplicate gives error.
+//MariaDB [company]> insert into dept values(1,100,'RR','Res');
+//ERROR 1062 (23000): Duplicate entry '100' for key 'PRIMARY'
+//MariaDB [company]> insert into dept values(1,101,'RR','Res');
+//Query OK, 1 row affected (0.010 sec)
+insert into dept(dno,dname) values(102,'Admin');// Only give values to 2 columns and rest of the columns for the entry takes NULL value
+//primary key must be given for inserting an entry into the table or atleast the primary key must have a default value
+//MariaDB [company]> insert into dept(dname) values('Admin');
+//ERROR 1364 (HY000): Field 'dno' doesn't have a default value
+
+update emp set sal = sal*0.1+sal where ssn = 123;
+update emp set sal=sal*0.5+sal where sal<(select avg(sal) from emp);
+delete from dept where dno=2;
+
+update dept set loc='EC' where dno = 102;
+select * from dept;
+update dept set mgrssn=2 where dno=102;
+
